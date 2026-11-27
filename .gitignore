@@ -1,0 +1,14 @@
+# File: .gitignore - files that Git must not track
+# Authors: [fill in names]
+# Course: PED 379
+# Midterm 2 Project
+
+# Installed packages and build output
+node_modules
+dist
+
+# Local settings and secrets
+.env
+
+# macOS system file
+.DS_Store
