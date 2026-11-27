@@ -54,4 +54,7 @@ TODO: describe how AI tools were used.
 
 ## Design link
 
-TODO: add the Figma link.
+[Earth Pulse in Figma](https://www.figma.com/design/doVXWP7Fp5gYIZd0TKlfd0)
+
+Design notes: [tokens](docs/design/tokens.md),
+[decisions and exported frames](docs/design/design-decisions.md).
