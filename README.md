@@ -72,7 +72,8 @@ I used Claude Code (an AI assistant) for this part, and it produced most of the 
   `docs/design/`, the markup in `App.jsx` and the five components, `styles.css`, the temporary
   `?preview` sample data, the accessibility fixes, the automated checks and
   `docs/verification-A.md`. It also downloaded the Inter font from its official release, and it
-  made the commits and pull requests under my Git account (each commit names Claude as co-author).
+  made the commits and pull requests under my Git account and merged pull request #1
+  (commits made by Claude Code name Claude as co-author).
 - **Decided by me:** the tasks and their order, a local Inter font, legend sizes that match the
   map markers, and acceptance of the design. I also accepted proposals from Claude Code for the
   depth bands, the map units, the marker radius and the data shape of the statistics.
