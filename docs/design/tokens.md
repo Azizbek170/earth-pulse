@@ -7,7 +7,8 @@ Midterm 2 Project
 
 # Design tokens
 
-Source: variables in the Figma file "Earth Pulse". CSS names are the web code syntax of each variable.
+Generated from the variables of the Figma file "Earth Pulse". CSS names are the web code syntax of each variable.
+The same names are defined in `styles.css`.
 
 ## Colors
 
@@ -24,16 +25,16 @@ Source: variables in the Figma file "Earth Pulse". CSS names are the web code sy
 | `--color-notice-surface` | `#FFF4D6` | Disclaimer banner |
 | `--color-border` | `#6B7785` | Borders of controls and cards |
 | `--color-map` | `#DCE6EE` | Map placeholder |
-| `--color-depth-shallow` | `#F6C445` | Depth 0-70 km, solid outline |
-| `--color-depth-medium` | `#E8743B` | Depth 70-300 km, dashed outline |
-| `--color-depth-deep` | `#8E6CC9` | Depth over 300 km, dotted outline |
+| `--color-depth-shallow` | `#F6C445` | Depth under 70 km, solid outline |
+| `--color-depth-medium` | `#E8743B` | Depth 70 to under 300 km, dashed outline |
+| `--color-depth-deep` | `#8E6CC9` | Depth 300 km or more, dotted outline |
 
 ## Typography
 
-Figma uses **Inter**. The CSS uses `Inter, system-ui, sans-serif` and loads no web font,
-so a computer without Inter shows its system font.
+Font: **Inter**, weights 400 and 600, loaded from `assets/fonts` (SIL Open Font License).
+CSS stack: `Inter, system-ui, sans-serif`.
 
-| CSS variable | Value |
+| CSS variable | Value in Figma |
 |---|---|
 | `--font-family` | Inter |
 | `--font-size-sm` | 14px |
@@ -45,9 +46,11 @@ so a computer without Inter shows its system font.
 | `--font-size-xl` | 28px |
 | `--line-height-xl` | 36px |
 
+In CSS the sizes are written in `rem` (16px = 1rem), so they follow the browser font setting.
+
 | Text style | Weight | Size / line height |
 |---|---|---|
-| Heading/XL | 700 | 28 / 36 |
+| Heading/XL | 600 | 28 / 36 |
 | Heading/L | 600 | 20 / 28 |
 | Body/Regular | 400 | 16 / 24 |
 | Body/Strong | 600 | 16 / 24 |
@@ -64,7 +67,7 @@ so a computer without Inter shows its system font.
 | `--space-4` | 16px |
 | `--space-5` | 24px |
 | `--space-6` | 32px |
-| `--size-touch` | 44px (minimum touch target) |
+| `--size-touch` | 44px |
 
 ## Radius
 
@@ -74,7 +77,23 @@ so a computer without Inter shows its system font.
 | `--radius-md` | 8px |
 | `--radius-lg` | 12px |
 
+## Marker and legend size
+
+The map is drawn in SVG units (`viewBox="0 0 1000 500"`). A marker has the radius
+`r = 4 + 2 * Math.max(0, magnitude)`. So its size on screen is `diameter x map width / 1000`,
+and the legend circles use the same rule. Magnitude is already a logarithmic scale,
+so a linear radius is enough. In CSS the variable holds the diameter in map units and the
+legend circle is `diameter x 0.1cqw` wide (plus the 2px outline).
+
+| CSS variable | CSS value (map units) | Figma desktop, map 992px | Figma mobile, map 358px |
+|---|---|---|---|
+| `--marker-m2` | 16 | 15.87px | 5.73px |
+| `--marker-m4` | 24 | 23.81px | 8.59px |
+| `--marker-m6` | 32 | 31.74px | 11.46px |
+
 ## Contrast check (WCAG 2.1 formula)
+
+Text needs 4.5:1. Borders, outlines and other non-text parts need 3:1.
 
 | Foreground | Background | Ratio | Minimum |
 |---|---|---|---|
@@ -96,6 +115,7 @@ so a computer without Inter shows its system font.
 | border | surface | 4.56:1 | 3.0:1 (non-text) |
 | border | background | 4.21:1 | 3.0:1 (non-text) |
 | accent | background | 6.16:1 | 3.0:1 (non-text) |
+| accent | surface | 6.67:1 | 3.0:1 (non-text) |
 | text | depth-shallow | 10.01:1 | 3.0:1 (non-text) |
 | text | depth-medium | 5.43:1 | 3.0:1 (non-text) |
 | text | depth-deep | 3.99:1 | 3.0:1 (non-text) |

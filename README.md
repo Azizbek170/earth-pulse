@@ -44,6 +44,12 @@ Planned for this project:
 - Loading, success, empty and error states
 - Responsive layout for desktop and mobile
 
+## Font
+
+The app uses [Inter](https://github.com/rsms/inter) 4.1 (Regular 400 and SemiBold 600),
+copyright The Inter Project Authors, under the
+[SIL Open Font License 1.1](assets/fonts/LICENSE.txt). The files come from the official release.
+
 ## Group members and roles
 
 TODO: add member names and roles.
