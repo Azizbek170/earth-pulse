@@ -26,6 +26,7 @@ placeholder rectangle.
 
 - Date fields use the browser date picker, so the date format and the picker icon follow the browser language.
 - Drop-down arrows are drawn by the browser.
+- A "Skip to search form" link appears at the top left when it gets keyboard focus.
 - Map markers are drawn later by member C. Until then the map layer is empty, also in `?preview`.
 
 ## Exported frames

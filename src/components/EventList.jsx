@@ -42,7 +42,12 @@ function EventItem({ event, selected, onSelect }) {
           aria-pressed={selected}
           onClick={() => onSelect(event.id)}
         >
-          {selected && <span className="event__selected">✓ Selected</span>}
+          {/* Screen readers already say "pressed", so this text is only visual. */}
+          {selected && (
+            <span className="event__selected" aria-hidden="true">
+              ✓ Selected
+            </span>
+          )}
           <span className="event__title">{title}</span>
           <span className="event__meta">
             {dateFormat.format(new Date(event.time))} · Depth {Math.round(event.depthKm)} km (
@@ -51,7 +56,7 @@ function EventItem({ event, selected, onSelect }) {
         </button>
 
         <a className="event__link" href={event.url} target="_blank" rel="noreferrer">
-          USGS details ↗
+          USGS details <span aria-hidden="true">↗</span>
           <span className="visually-hidden"> for {title} (opens in a new tab)</span>
         </a>
       </div>

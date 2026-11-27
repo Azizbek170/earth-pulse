@@ -108,6 +108,10 @@ export default function App() {
 
   return (
     <>
+      <a className="skip-link" href="#search">
+        Skip to search form
+      </a>
+
       <header className="site-header">
         <div className="site-header__top">
           <div>
