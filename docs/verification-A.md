@@ -40,12 +40,36 @@ opened with the temporary `?preview` mode, which uses made-up data. No request t
 | - | Legend circles equal the map markers | passed | Added test circles to the SVG layer: the difference is under 0.1px at every width. |
 | - | Reduced motion | passed | With `prefers-reduced-motion: reduce` the spinner and the map label have no animation. |
 
+## Stage 5: accessibility and polish
+
+An extra audit after the merge found four problems. All are fixed.
+
+| Problem found | Fix | Checked again |
+|---|---|---|
+| At 200% text size the number and date fields cut off their text, and the status symbol left its circle. Long statistics broke into two lines. | Fields use `min-height`; icons and statistic tiles are sized in `rem`. | passed: no clipped fields at 360 and 1440 px, no horizontal scroll |
+| In high contrast mode (forced colors, emulated) the button had no border, the depth outlines were dark on black and the date icons disappeared. | Transparent button border; system colors for outlines; `color-scheme: light dark` in that mode. | passed: screenshots with dark and light forced colors |
+| No way to skip the navigation links. | "Skip to search form" link, visible on focus. | passed: first Tab shows it; Enter then Tab reaches the City field |
+| Screen reader names repeated "Selected" next to "pressed" and included the arrow symbol. | Both symbols are hidden from assistive technology. | passed: checked in the Chrome accessibility tree |
+
+| # | Check after the fixes | Result | How verified |
+|---|---|---|---|
+| 1 | Build and preview | passed | `npm run build`; HTTP 200 on `/` and `/?preview`. |
+| 3 | Console in every state | passed | Same runs as in stage 4: no errors or warnings. |
+| 4 | Lighthouse | passed | 12 runs: Accessibility 100, Best Practices 100. |
+| 5 | Source checks | passed | Same script as in stage 4. |
+| 6 | Token contrast | passed | Same script, no failures. |
+| 7 | No horizontal scroll | passed | 360 px and the other widths, also at 200% text size. |
+| 8 | Keyboard and focus | passed | Skip link first, then the same order; every stop has a visible outline. |
+| - | No Vite template files left | passed | Searched tracked file names and sources. |
+| 9 | Authors after the merge | passed, see note | All member commits: `Azizbek170 <azizbrat77@gmail.com>`. The merge commit `3be4cb3` was created by GitHub: author is the same account with its GitHub no-reply address ("Azizbek Erkinov"), committer is "GitHub". No other person appears. Claude is named only in `Co-Authored-By` lines. |
+
 ## Differences from the design
 
 - The map layer is empty, also in `?preview`: member C draws the markers.
 - Date fields and drop-down arrows are drawn by the browser.
 - The preview success message ends with "(sample data)".
 - All preview events have the time 14:05.
+- The skip link is not in the Figma frames; it appears only on keyboard focus.
 
 ## Could not verify
 
@@ -54,5 +78,6 @@ opened with the temporary `?preview` mode, which uses made-up data. No request t
 | Screen reader (NVDA, VoiceOver, Orca) | No screen reader run here | Submit a search and listen for the status and error messages. |
 | Real phone and touch | Only Chrome emulation | Open the app on a phone. |
 | Firefox and Safari | Only Chrome was tested | Check the legend circle sizes and date fields. |
+| Real Windows high contrast theme and real browser zoom | Only emulated (forced colors, root font size 200%) | Turn on a contrast theme; zoom the page to 200% and 400%. |
 | Real data, live loading, network off | Needs the hooks of members B and C | Repeat the checks after their work is merged. |
 | Focus on map markers | There are no markers yet | Tab to a marker after member C adds them. |
